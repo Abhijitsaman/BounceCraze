@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1889,10 +1889,12 @@
         }
         
         // Reset game
-        function resetGame() { 
-                if (typeof Kodular !== 'undefined') {
-   
-            Kodular.PostWebviewString("show_ad_now");
+        function resetGame() {
+                if (typeof MyActivity !==
+         'undefined' && typeof 
+        MyActivity.showAd === 'function')
+         {
+                      MyActivity.showAd();
 }
             score = 0;
             coins = 0;
