@@ -328,9 +328,45 @@
             transform: rotate(-45deg);
             margin-top: -1px;
         }
+
+        /* --- ধাপ ১: CSS কোড যোগ করা --- */
+        #no-internet-overlay {
+            box-sizing: border-box; 
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            display: none; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        #no-internet-overlay h2 {
+            font-size: 24px; 
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        #no-internet-overlay p {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 90%; 
+        }
     </style>
 </head>
 <body>
+    <!-- --- ধাপ ২: HTML কোড যোগ করা --- -->
+    <div id="no-internet-overlay">
+        <h2>⚠ No Internet Connection</h2>
+        <p>Please check if your internet connection is working correctly.</p>
+    </div>
+
     <div id="game-container">
         <canvas id="game-canvas"></canvas>
         <div id="score-display">Score: 0</div>
@@ -382,7 +418,7 @@
         
         <!-- Privacy Modal -->
         <div class="privacy-modal" id="privacy-modal">
-            <span class="close-privacy">&times;</span>
+            <span class="close-privacy">×</span>
             <div class="privacy-content">
                 <h2>Privacy & User Information</h2>
                 <p>This app does not collect, store, or share any personal information from users. It is built purely for entertainment purposes and does not access your device's private data.</p>
@@ -2010,6 +2046,25 @@
         
         // Initialize background elements when page loads
         initBackgroundElements();
+    </script>
+
+    <!-- --- ধাপ ৩: JavaScript কোড যোগ করা --- -->
+    <script>
+        const overlay = document.getElementById('no-internet-overlay');
+
+        function checkConnection() {
+            if (navigator.onLine) {
+                overlay.style.display = 'none';
+            } else {
+                overlay.style.display = 'flex';
+            }
+        }
+
+        // প্রতি ৩ সেকেন্ডে ইন্টারনেট কানেকশন চেক করে
+        setInterval(checkConnection, 3000);
+
+        // পেজ লোড হওয়ার সময় একবার চেক করে
+        window.addEventListener('load', checkConnection);
     </script>
 </body>
 </html>
